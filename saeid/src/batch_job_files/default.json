@@ -1,0 +1,14 @@
+{
+    "__all__": {
+      "--mail-user": "",
+      "--mail-type": "ALL",
+      "--mem": "4G",
+      "--time": "12:00:00"
+    },
+    "PLAI": {
+      "--partition":  "plai"
+    },
+    "CC": {
+      "--account":    "rrg-kevinlb"
+    }
+}
