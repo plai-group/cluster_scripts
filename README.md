@@ -1,2 +1,2 @@
 # cluster_scripts
-scripts for working on the cluster
+This is a repo of scripts various members of the lab have made to submit jobs to the cluster. The scripts are maintained by their respective owners, who should be contacted directly for information about how to use. See readmes within each directory for script-specific information. Warning: most weren't written for public useage, and will likely need to be modified in order to get running on your machine. 
