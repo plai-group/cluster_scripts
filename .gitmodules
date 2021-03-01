@@ -1,0 +1,3 @@
+[submodule "andreas"]
+	path = andreas
+	url = https://github.com/ammunk/hpc.git
