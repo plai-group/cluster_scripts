@@ -5,7 +5,7 @@ If do you use any of the scripts, please contact me (vaden) after getting it wor
 
 ## Pullling and updating submodules
 
-Some of these script are added as
+Some of these scripts are added as
 [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). You can clone
 these by running
 
