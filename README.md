@@ -19,6 +19,12 @@ or if you already cloned, you can do
 git submodule update --init
 ```
 
+To always pull submodules by default run
+
+``` bash
+git config submodule.recurse true
+```
+
 The aliases below might be useful as they e.g. let you pull any upstream changes
 to the submodules.
 
