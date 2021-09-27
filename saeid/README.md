@@ -5,10 +5,10 @@
 - __Setting it up as a bash function__: You can add the following code to your bashrc or zshrc file. It defines makes this submissions script accessible in your terminal!
     ```
     submit_job(){
-        ${HOME}/.dotfiles/job_submission/submit_job.py $*
+        <PATH_TO_submit_job.py> $*
     }
     ```
-    Then, you can replace all the `./submit_job.py` in the following sections with `submit_job`.
+    where `<PATH_TO_submit_job.py>` should be replaced with the absolute path to the `submit_job.py` file. Then, you can replace all the `./submit_job.py` in the following sections with `submit_job`.
 
 ### Submitting a generic job
 
