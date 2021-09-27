@@ -12,10 +12,6 @@ VERBOSE = True if "SUBMIT_JOB_VERBOSE" in os.environ else False
 
 # NOTE: SLURM argument/value pairs should be passed with whitespaces in between and not equal signs.
 
-DEFAULT_SLURM_ARGS = {"--mail-user": "saeidnp@cs.ubc.ca",
-                      "--mail-type": "ALL",
-                      "--mem": "4G", 
-                      "--time": "12:00:00"}
 SBATCH_COMMAND = "sbatch"
 # Paths
 EXP_DIR = Path(os.getcwd())
