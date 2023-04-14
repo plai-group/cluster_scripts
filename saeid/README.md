@@ -1,35 +1,36 @@
 # Job submission script instructions
 ## Quick start
-- First, set your default SLURM arguments in [batch_job_files/default.json](batch_job_files/default.json) (__most importantly, your email address__)
+- First, set your default SLURM arguments in [default.json](default.json) (__most importantly, your email address__)
 - Make sure the [submit_job.py](submit_job.py) is executable. It can be made executable by `chmod +x submit_job.py`.
+- __Setting it up as a bash function__: You can add the following code to your bashrc or zshrc file. It defines makes this submissions script accessible in your terminal!
+    ```
+    submit_job(){
+        <PATH_TO_submit_job.py> $*
+    }
+    ```
+    where `<PATH_TO_submit_job.py>` should be replaced with the absolute path to the `submit_job.py` file. Then, you can replace all the `./submit_job.py` in the following sections with `submit_job`.
 
 ### Submitting a generic job
+
 - Run the following
     ```
-    ./submit_job.py --script _run.sh -J <job_name> --time <time_limit> --mem <mem_limit> -- <WORKER_CMD>
+    ./submit_job.py -J <job_name> --time <time_limit> --mem <mem_limit> -- <WORKER_CMD>
     ```
     where `<WORKER_CMD>` is the command to be run by the worker.
+
 - Example:
     ```
-    ./submit_job.py --script _run.sh -J wandb_sweep --time 2:00:00 --mem 2G -- hostname
+    ./submit_job.py -J wandb_sweep --time 2:00:00 --mem 2G -- hostname
     ```
     it submits a job with the specified name, time limit and memory limit which runs the exact command `hostname` which prints the worker machine's name.
 
-### Submitting a Python job
-- Place the python environment activation command in the [ENV file](ENV) e.g. `source ~/.virtualenvs/venv/bin/activate`.
-- Run the following
-    ```
-    ./submit_job.py -J <job_name> --time <time_limit> --mem <mem_limit> -- <PYTHON_ARGS>
-    ```
-    where `<PYTHON_ARGS>` are the arguments (including file name) to python.
-- Example: The following submits a job called "test" with 2 hours time and 2GB memory limit which runs `python main.py with lr=0.1 batch_size=128`
-    ```
-    ./submit_job.py -J test --time 2:00:00 --mem 2G -- main.py with lr=0.1 batch_size=128
-    ```
+- __NOTE__: the job submission script ([_run.sh](_run.sh)) runs `source ENV` in the working directory if the file `ENV` exists. It gives the ability to prepare environments for example, setting environment variables or activating a Python virtual environment. A simple example of the contents of an `ENV` file is `source ~/.virtualenvs/venv/bin/activate`.
 
-__NOTE__: The job outputs (both stdout and stderr) are logged in [batch_job_files/reports](batch_job_files/reports) with the naming format of `results-<job_id>-<job_name>.out` for non-array jobs and `results-<job_id>_<array_index>-<job_name>.out` for array jobs/
+- The job outputs (both stdout and stderr) are logged in a directory called `batch_job_reports` in the working directoy (this directory will be created if it does not exist). Each output file has the naming format of `results-<job_id>-<job_name>.out` for non-array jobs and `results-<job_id>_<array_index>-<job_name>.out` for array jobs.
+- __NOTE__: If you use the custom `zshrc` file provided in this repository, it defines a custom function `submit_job` that calls `submit_job.py` under the hood. Therefore, it won't be required to type in the full file path anymore.
 
 ## How it works (in more details)
+
 This is the job submission command format
 ```
 ./submit_job.py <JOB_SUBMISSION_ARGS> <SLURM_ARGS> -- <WORKER_ARGS>
