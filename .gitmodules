@@ -1,3 +1,6 @@
 [submodule "andreas"]
 	path = andreas
 	url = https://github.com/ammunk/hpc.git
+[submodule "saeid"]
+	path = saeid
+	url = https://github.com/saeidnp/job_submission.git
