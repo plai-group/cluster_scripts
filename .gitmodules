@@ -4,3 +4,4 @@
 [submodule "saeid"]
 	path = saeid
 	url = https://github.com/saeidnp/job_submission.git
+	branch = main
