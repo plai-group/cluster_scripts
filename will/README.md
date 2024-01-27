@@ -45,3 +45,17 @@ All of the output printed to the terminal when you run `python start_jobs.py` is
 
 ### .out and .err files
 Your job will also save a `{job_id}.out` and `{job_id}.err` file inside `$SCRATCH/slurm-outputs` if everything is configured correctly. If you want to find these files for a particular job you submitted but don't know it's job id, check in `history.txt`, which will contain the job id.
+
+### want even more documentation of your submitted jobs?
+If you want to make it really easy to re-submit old jobs, just comment-out and never delete the Python code you write to submit them. E.g.
+```
+commands =  [
+    ('sample-ffhq', 1, 3, "torchrun --standalone --nproc_per_node=${GPUS} generate.py --seeds=0-49999 --batch=64 --network=training-runs/2updi9be/network-snapshot-020224.pkl --steps 40     --S_churn 50 --S_noise 1.007 --parallel_id 1"),
+    # ('sample-ffhq', 1, 3, "torchrun --standalone --nproc_per_node=${GPUS} generate.py --seeds=0-49999 --batch=64 --network=training-runs/l9ksfiar/network-snapshot-020224.pkl --steps 40     --S_churn 50 --S_noise 1.007 --parallel_id 1"),
+    #
+    # ...more commented out lines...
+    #
+    #('ffhq', 4, 24, "torchrun --standalone --nproc_per_node=<GPUS> train.py --path=datasets/ffhq-64x64.zip --data_class CLIPDataset --batch $((<GPUS>*32)) --seed 1 --exist 1,1 --observe    d 0,1 --arch=ddpmpp --cres=1,2,2,2 --lr=1e-4 --dropout=0.25 --augment=0.15 --n_comp 0,16"),
+]
+```
+I have nearly 600 commented-out lines in one of my `submit_job.py` scripts. Life hack :')
